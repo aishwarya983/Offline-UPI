@@ -1,0 +1,45 @@
+.network-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--font-mono);
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.network-indicator__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.network-indicator.is-online {
+  color: var(--success);
+  border-color: var(--success-tint);
+  background: var(--success-tint);
+}
+
+.network-indicator.is-online .network-indicator__dot {
+  background: var(--success);
+}
+
+.network-indicator.is-offline {
+  color: var(--danger);
+  border-color: var(--danger-tint);
+  background: var(--danger-tint);
+}
+
+.network-indicator.is-offline .network-indicator__dot {
+  background: var(--danger);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}

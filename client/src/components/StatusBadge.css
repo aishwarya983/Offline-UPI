@@ -1,0 +1,45 @@
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.status-pill--completed {
+  color: var(--success);
+  background: var(--success-tint);
+}
+
+.status-pill--failed {
+  color: var(--danger);
+  background: var(--danger-tint);
+}
+
+.status-pill--processing {
+  color: var(--brand-ink);
+  background: var(--brand-tint);
+}
+
+/* The "pending sync" stamp is the app's one signature flourish: a
+   payment that hasn't touched the server yet is marked like something
+   stamped by hand, not by a server. Everything else stays quiet pills. */
+.stamp--pending {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border: 1.5px dashed var(--pending);
+  border-radius: 4px;
+  color: var(--pending);
+  background: var(--pending-tint);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transform: rotate(-2deg);
+}

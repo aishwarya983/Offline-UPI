@@ -1,0 +1,48 @@
+.detail-page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.detail-back {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-decoration: none;
+  width: fit-content;
+}
+
+.detail-list {
+  margin: 12px 0 0;
+}
+
+.detail-list div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 0;
+}
+
+.detail-list div + div {
+  border-top: 1px solid var(--border);
+}
+
+.detail-list dt {
+  font-size: 13px;
+  color: var(--ink-soft);
+  flex-shrink: 0;
+}
+
+.detail-list dd {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: right;
+}
+
+.detail-loading {
+  text-align: center;
+  color: var(--ink-faint);
+  padding: 60px 0;
+}
