@@ -15,6 +15,7 @@ api.interceptors.request.use((config) => {
 export function extractErrorMessage(err) {
   return (
     err?.response?.data?.error ||
+    err?.message ||
     "Something went wrong. Check your connection and try again."
   );
 }

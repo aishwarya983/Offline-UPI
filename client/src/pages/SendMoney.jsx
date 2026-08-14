@@ -93,14 +93,19 @@ export default function SendMoney() {
     setError("");
 
     if (!receiver) {
-      setError("Choose someone to pay from the list.");
+      setError("Choose a recipient from the list.");
       return;
     }
     const numericAmount = Number(amount);
-    if (!numericAmount || numericAmount <= 0) {
-      setError("Enter a valid payment amount.");
+    if (!Number.isFinite(numericAmount) || numericAmount <= 0) {
+      setError("Enter a valid payment amount greater than 0.");
       return;
     }
+    if (!user) {
+      setError("You must be logged in to send payments.");
+      return;
+    }
+
     if (isOnline && numericAmount > (user?.balance ?? 0)) {
       setError("Insufficient balance.");
       return;
@@ -112,6 +117,28 @@ export default function SendMoney() {
   async function handleConfirm() {
     setSubmitting(true);
     setError("");
+    // Re-validate before sending/queueing to protect against any UI bypass.
+    if (!receiver) {
+      setError("Choose a recipient from the list.");
+      setSubmitting(false);
+      setStep(STEP_FORM);
+      return;
+    }
+
+    const numericAmount = Number(amount);
+    if (!Number.isFinite(numericAmount) || numericAmount <= 0) {
+      setError("Enter a valid payment amount greater than 0.");
+      setSubmitting(false);
+      setStep(STEP_FORM);
+      return;
+    }
+
+    if (!user) {
+      setError("You must be logged in to send payments.");
+      setSubmitting(false);
+      setStep(STEP_FORM);
+      return;
+    }
 
     if (!isOnline) {
       const record = await queuePayment({
