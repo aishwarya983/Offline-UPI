@@ -125,7 +125,7 @@ export default function Transactions() {
               <li key={tx.id} className="tx-row">
                 <div className="tx-row__main">
                   <span className="tx-row__party">To {tx.counterpart || "—"}</span>
-                  <span className="tx-row__date mono">{tx.id}</span>
+                  <span className="tx-row__date">{formatRelativeDate(tx.createdAt)}</span>
                   {tx.status === "FAILED" && tx.lastError && (
                     <span className="tx-row__error">{tx.lastError}</span>
                   )}
