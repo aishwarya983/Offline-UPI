@@ -24,8 +24,7 @@ export default function SyncBanner({ syncState, summary, queueSize }) {
     return (
       <div className="sync-banner sync-banner--warning">
         {succeeded > 0 && `✓ ${succeeded} synchronized. `}
-        {failed} {failed === 1 ? "payment" : "payments"} couldn't be synced — we'll retry when
-        you're back online.
+        {failed} {failed === 1 ? "payment failed" : "payments failed"} — will retry automatically.
       </div>
     );
   }

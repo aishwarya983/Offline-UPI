@@ -75,8 +75,13 @@ export async function queuePayment({ receiverId, receiverLabel, amount, note, ow
 
 export async function getAllPending() {
   const db = await getDB();
-  const all = await db.getAllFromIndex(STORE_NAME, "status", "PENDING_SYNC");
-  return all.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+  const all = await db.getAll(STORE_NAME);
+  // Return both PENDING_SYNC and FAILED items, sorted by creation time.
+  // FAILED items are retryable and should be included in the next sync attempt.
+  const pending = all.filter(
+    (item) => item.status === "PENDING_SYNC" || item.status === "FAILED"
+  );
+  return pending.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
 }
 
 export async function getAllQueuedTransactions() {
