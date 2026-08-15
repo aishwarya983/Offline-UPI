@@ -67,6 +67,8 @@ export default function Transactions() {
       createdAt: item.createdAt,
       counterpart: item.receiverLabel,
       direction: "sent",
+      lastError: item.lastError,
+      attempts: item.attempts,
     }));
 
   const serverAsRows = transactions.map((t) => ({
@@ -124,6 +126,9 @@ export default function Transactions() {
                 <div className="tx-row__main">
                   <span className="tx-row__party">To {tx.counterpart || "—"}</span>
                   <span className="tx-row__date mono">{tx.id}</span>
+                  {tx.status === "FAILED" && tx.lastError && (
+                    <span className="tx-row__error">{tx.lastError}</span>
+                  )}
                 </div>
                 <div className="tx-row__side">
                   <span className="tx-row__amount mono">−{formatAmount(tx.amount)}</span>

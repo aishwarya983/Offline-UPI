@@ -49,6 +49,7 @@ export default function Dashboard() {
       createdAt: p.createdAt,
       counterpartLabel: p.receiverLabel,
       direction: "sent",
+      lastError: p.lastError,
     })),
     ...transactions.map((t) => ({
       id: t.id,
@@ -113,6 +114,9 @@ export default function Dashboard() {
                     {tx.direction === "sent" ? "To" : "From"} {tx.counterpartLabel || "—"}
                   </span>
                   <span className="tx-row__date">{formatRelativeDate(tx.createdAt)}</span>
+                  {tx.status === "FAILED" && tx.lastError && (
+                    <span className="tx-row__error">{tx.lastError}</span>
+                  )}
                 </div>
                 <div className="tx-row__side">
                   <span className={`tx-row__amount mono ${tx.direction === "received" ? "is-positive" : ""}`}>
