@@ -71,3 +71,20 @@
 .auth-card input:focus-visible {
   border-color: var(--brand);
 }
+@media (max-width: 480px) {
+  .auth-page {
+    padding: 16px;
+  }
+
+  .auth-card {
+    max-width: 100%;
+  }
+
+  .auth-card__brand {
+    margin-bottom: 18px;
+  }
+
+  .auth-card__subtitle {
+    margin-bottom: 18px;
+  }
+}
