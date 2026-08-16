@@ -7,6 +7,7 @@ import "./AuthPages.css";
 export default function Register() {
   const { register } = useAuth();
   const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,9 +17,34 @@ export default function Register() {
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
+
+    const trimmedName = name.trim();
+    const normalizedEmail = email.trim();
+
+    if (!trimmedName) {
+      setError("Please enter your name.");
+      return;
+    }
+
+    if (trimmedName.length < 2) {
+      setError("Name must be at least 2 characters.");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters.");
+      return;
+    }
+
+    if (!normalizedEmail) {
+      setError("Please enter your email address.");
+      return;
+    }
+
     setSubmitting(true);
+
     try {
-      await register(name, email, password);
+      await register(trimmedName, normalizedEmail, password);
       navigate("/");
     } catch (err) {
       setError(extractErrorMessage(err));
@@ -34,7 +60,9 @@ export default function Register() {
           <span className="auth-card__mark">₹</span>
           Offline UPI
         </div>
+
         <h1>Create an account</h1>
+
         <span className="auth-card__subtitle">
           You'll start with a ₹10,000 simulated balance.
         </span>
@@ -53,6 +81,7 @@ export default function Register() {
               onChange={(e) => setName(e.target.value)}
             />
           </div>
+
           <div className="field">
             <label htmlFor="email">Email</label>
             <input
@@ -64,6 +93,7 @@ export default function Register() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
+
           <div className="field">
             <label htmlFor="password">Password</label>
             <input
@@ -77,7 +107,12 @@ export default function Register() {
             />
             <span className="field-hint">At least 6 characters</span>
           </div>
-          <button className="btn btn--primary btn--block" type="submit" disabled={submitting}>
+
+          <button
+            className="btn btn--primary btn--block"
+            type="submit"
+            disabled={submitting}
+          >
             {submitting ? "Creating account..." : "Create account"}
           </button>
         </form>
