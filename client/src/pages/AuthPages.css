@@ -59,3 +59,15 @@
   font-weight: 600;
   text-decoration: none;
 }
+
+/* Accessible keyboard focus states */
+.auth-card input:focus-visible,
+.auth-card a:focus-visible,
+.auth-card button:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.auth-card input:focus-visible {
+  border-color: var(--brand);
+}
