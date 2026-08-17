@@ -46,3 +46,16 @@
   color: var(--ink-faint);
   padding: 60px 0;
 }
+@media (max-width: 480px) {
+  .detail-list div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .detail-list dd {
+    max-width: 100%;
+    text-align: left;
+    overflow-wrap: anywhere;
+  }
+}
