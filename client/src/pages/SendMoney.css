@@ -122,3 +122,36 @@
   outline-offset: -2px;
   background: var(--bg);
 }
+@media (max-width: 480px) {
+  .page-title {
+    font-size: 18px;
+  }
+
+  .summary-list {
+    padding: 12px;
+  }
+
+  .summary-list div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .summary-list dd {
+    max-width: 100%;
+    text-align: left;
+    overflow-wrap: anywhere;
+  }
+
+  .confirm-result {
+    padding: 32px 18px;
+  }
+
+  .confirm-result__actions {
+    flex-direction: column;
+  }
+
+  .confirm-result__actions .btn {
+    width: 100%;
+  }
+}
