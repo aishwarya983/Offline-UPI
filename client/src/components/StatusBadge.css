@@ -43,3 +43,7 @@
   letter-spacing: 0.06em;
   transform: rotate(-2deg);
 }
+.status-pill,
+.stamp--pending {
+  white-space: nowrap;
+}
