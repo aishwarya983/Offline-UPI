@@ -167,3 +167,45 @@
 .tx-row__amount.is-positive {
   color: var(--success);
 }
+
+@media (max-width: 480px) {
+  .dashboard {
+    gap: 18px;
+  }
+
+  .balance-card__amount {
+    font-size: 30px;
+  }
+
+  .quick-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-action {
+    padding: 14px 16px;
+  }
+
+  .tx-row {
+    align-items: flex-start;
+    gap: 12px;
+    padding: 13px 14px;
+  }
+
+  .tx-row__main {
+    flex: 1;
+  }
+
+  .tx-row__side {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  .tx-row__amount {
+    font-size: 13px;
+  }
+
+  .tx-row__error {
+    overflow-wrap: anywhere;
+  }
+}
