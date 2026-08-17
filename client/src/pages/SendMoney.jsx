@@ -280,9 +280,12 @@ export default function SendMoney() {
               setReceiver(null);
             }}
             autoComplete="off"
+            aria-label="Search for a payment receiver"
+            aria-autocomplete="list"
+            aria-controls="receiver-results"
           />
           {results.length > 0 && (
-            <ul className="receiver-results">
+            <ul id="receiver-results" className="receiver-results">
               {results.map((person) => (
                 <li key={person.id}>
                   <button type="button" onClick={() => selectReceiver(person)}>
