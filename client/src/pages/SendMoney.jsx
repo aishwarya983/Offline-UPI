@@ -185,12 +185,16 @@ export default function SendMoney() {
       <div className="send-money">
         <div className="card confirm-result">
           <div className={`confirm-result__icon ${outcome.queued ? "is-pending" : "is-success"}`}>
-            {outcome.queued ? "⏳" : "✓"}
+            {outcome.queued ? (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            ) : (
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            )}
           </div>
           <h2>{outcome.queued ? "Payment saved" : "Payment sent"}</h2>
           <p>{outcome.message}</p>
           <div className="confirm-result__actions">
-            <button className="btn btn--secondary" onClick={() => navigate("/")}>
+            <button className="btn btn--secondary" onClick={() => navigate("/dashboard")}>
               Back to dashboard
             </button>
             <button

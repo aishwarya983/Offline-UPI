@@ -90,13 +90,16 @@ export default function Transactions() {
       <h1 className="page-title">Transactions</h1>
 
       <div className="tx-filters">
-        <input
-          type="text"
-          className="tx-filters__search"
-          placeholder="Search by name or note"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <div className="tx-filters__search-wrapper">
+          <svg className="tx-filters__search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input
+            type="text"
+            className="tx-filters__search"
+            placeholder="Search by name or note"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
         <div className="tx-filters__chips">
           {FILTERS.map((f) => (
             <button
@@ -111,10 +114,13 @@ export default function Transactions() {
         </div>
       </div>
 
-      {error && <div className="alert alert--warning">{error} Showing what's saved locally.</div>}
+      {error && <div className="alert alert--warning">{error} Showing what&apos;s saved locally.</div>}
 
       {!loading && rows.length === 0 ? (
         <div className="empty-state card">
+          <div className="empty-state__icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
           <h3>No transactions found</h3>
           <p>Try a different search or filter.</p>
         </div>
@@ -123,23 +129,37 @@ export default function Transactions() {
           {rows.map((tx) =>
             tx.isLocal ? (
               <li key={tx.id} className="tx-row">
+                <div className="tx-row__icon-wrapper">
+                  <span className="tx-row__icon" aria-hidden="true">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                  </span>
+                </div>
                 <div className="tx-row__main">
-                  <span className="tx-row__party">To {tx.counterpart || "—"}</span>
+                  <span className="tx-row__party">To {tx.counterpart || "\u2014"}</span>
                   <span className="tx-row__date">{formatRelativeDate(tx.createdAt)}</span>
                   {tx.status === "FAILED" && tx.lastError && (
                     <span className="tx-row__error">{tx.lastError}</span>
                   )}
                 </div>
                 <div className="tx-row__side">
-                  <span className="tx-row__amount mono">−{formatAmount(tx.amount)}</span>
+                  <span className="tx-row__amount mono">{"\u2212"}{formatAmount(tx.amount)}</span>
                   <StatusBadge status={tx.status} />
                 </div>
               </li>
             ) : (
               <Link key={tx.id} to={`/transactions/${tx.id}`} className="tx-row">
+                <div className="tx-row__icon-wrapper">
+                  <span className={`tx-row__icon ${tx.direction === "received" ? "tx-row__icon--in" : ""}`} aria-hidden="true">
+                    {tx.direction === "sent" ? (
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+                    ) : (
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+                    )}
+                  </span>
+                </div>
                 <div className="tx-row__main">
                   <span className="tx-row__party">
-                    {tx.direction === "sent" ? "To" : "From"} {tx.counterpart || "—"}
+                    {tx.direction === "sent" ? "To" : "From"} {tx.counterpart || "\u2014"}
                   </span>
                   <span className="tx-row__date">{formatRelativeDate(tx.createdAt)}</span>
                 </div>
@@ -147,7 +167,7 @@ export default function Transactions() {
                   <span
                     className={`tx-row__amount mono ${tx.direction === "received" ? "is-positive" : ""}`}
                   >
-                    {tx.direction === "sent" ? "−" : "+"}
+                    {tx.direction === "sent" ? "\u2212" : "+"}
                     {formatAmount(tx.amount)}
                   </span>
                   <StatusBadge status={tx.status} />

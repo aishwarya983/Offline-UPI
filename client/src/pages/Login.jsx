@@ -18,7 +18,7 @@ export default function Login() {
     setSubmitting(true);
     try {
       await login(email, password);
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       setError(extractErrorMessage(err));
     } finally {
@@ -30,11 +30,11 @@ export default function Login() {
     <div className="auth-page">
       <div className="auth-card card">
         <div className="auth-card__brand">
-          <span className="auth-card__mark">₹</span>
+          <span className="auth-card__mark" aria-hidden="true">₹</span>
           Offline UPI
         </div>
-        <h1>Log in</h1>
-        <span className="auth-card__subtitle">Welcome back. Pay online or offline.</span>
+        <h1>Welcome back</h1>
+        <span className="auth-card__subtitle">Sign in to manage your payments.</span>
 
         {error && <div className="alert alert--error">{error}</div>}
 
@@ -46,6 +46,7 @@ export default function Login() {
               type="email"
               autoComplete="email"
               required
+              placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -57,12 +58,13 @@ export default function Login() {
               type="password"
               autoComplete="current-password"
               required
+              placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <button className="btn btn--primary btn--block" type="submit" disabled={submitting}>
-            {submitting ? "Logging in..." : "Log in"}
+            {submitting ? "Signing in..." : "Sign in"}
           </button>
         </form>
 

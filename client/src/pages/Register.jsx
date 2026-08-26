@@ -45,7 +45,7 @@ export default function Register() {
 
     try {
       await register(trimmedName, normalizedEmail, password);
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
       setError(extractErrorMessage(err));
     } finally {
@@ -57,14 +57,14 @@ export default function Register() {
     <div className="auth-page">
       <div className="auth-card card">
         <div className="auth-card__brand">
-          <span className="auth-card__mark">₹</span>
+          <span className="auth-card__mark" aria-hidden="true">₹</span>
           Offline UPI
         </div>
 
         <h1>Create an account</h1>
 
         <span className="auth-card__subtitle">
-          You'll start with a ₹10,000 simulated balance.
+          Start with a ₹10,000 simulated balance. No bank details needed.
         </span>
 
         {error && <div className="alert alert--error">{error}</div>}
@@ -77,6 +77,7 @@ export default function Register() {
               type="text"
               autoComplete="name"
               required
+              placeholder="Your full name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -89,6 +90,7 @@ export default function Register() {
               type="email"
               autoComplete="email"
               required
+              placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -102,10 +104,10 @@ export default function Register() {
               autoComplete="new-password"
               required
               minLength={6}
+              placeholder="At least 6 characters"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <span className="field-hint">At least 6 characters</span>
           </div>
 
           <button
@@ -118,7 +120,7 @@ export default function Register() {
         </form>
 
         <div className="auth-card__footer">
-          Already have an account? <Link to="/login">Log in</Link>
+          Already have an account? <Link to="/login">Sign in</Link>
         </div>
       </div>
     </div>
