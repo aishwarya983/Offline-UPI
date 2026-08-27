@@ -655,3 +655,23 @@
     padding: 48px 0;
   }
 }
+/* ── Very Small Screens ───────────────────────────────────── */
+
+@media (max-width: 380px) {
+  .hero {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hero__title {
+    font-size: 30px;
+  }
+
+  .hero-phone {
+    width: 220px;
+  }
+
+  .hero-phone__screen {
+    min-height: 260px;
+  }
+}
