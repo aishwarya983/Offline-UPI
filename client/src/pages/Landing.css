@@ -551,8 +551,13 @@
 /* ── Loader ───────────────────────────────────────────────── */
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
+  0%, 100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.35;
+  }
 }
 
 /* ── Responsive ───────────────────────────────────────────── */
@@ -655,6 +660,7 @@
     padding: 48px 0;
   }
 }
+
 /* ── Very Small Screens ───────────────────────────────────── */
 
 @media (max-width: 380px) {
@@ -673,5 +679,21 @@
 
   .hero-phone__screen {
     min-height: 260px;
+  }
+}
+
+/* ── Mobile Header ────────────────────────────────────────── */
+
+@media (max-width: 480px) {
+  .landing-header__inner {
+    padding: 10px 16px;
+  }
+
+  .landing-header__actions {
+    gap: 6px;
+  }
+
+  .landing-header__name {
+    font-size: 14px;
   }
 }
