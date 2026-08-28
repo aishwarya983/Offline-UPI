@@ -697,3 +697,11 @@
     font-size: 14px;
   }
 }
+/* ── Accessibility ────────────────────────────────────────── */
+
+.landing a:focus-visible,
+.landing button:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
